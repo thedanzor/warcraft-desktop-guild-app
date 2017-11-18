@@ -1,0 +1,11 @@
+# Ignored directories:
+gems
+node_modules
+doc
+reports
+src/config
+
+# Ignored files:
+.DS_Store
+npm-debug.log
+.vscode

@@ -1,0 +1,280 @@
+/* CSS reset */
+body, html, p, div, h1, h2, h3, h4, h5, a, input, button, textarea {
+	display: block;
+	padding: 0px;
+	margin: 0px;
+	box-sizing: border-box;
+	border: none;
+
+	font-weight: 300;
+}
+
+h1, h2, h3, h4, h5 {
+	font-weight: 50;
+}
+
+button {
+	padding: 14px 18px;
+	cursor: pointer;
+	text-transform: uppercase;
+
+	transition: background 0.5s ease;
+}
+
+input {
+	background: #18152a;
+	color: #4f486b;
+	margin: 18px auto;
+	padding: 18px 20px;
+	min-width: 300px;
+	border-bottom: 1px solid #2e2a42;
+}
+
+input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	color: #4f486b;
+}
+input::-moz-placeholder { /* Firefox 19+ */
+	color: #4f486b;
+}
+input:-ms-input-placeholder { /* IE 10+ */
+	color: #4f486b;
+}
+input:-moz-placeholder { /* Firefox 18- */
+	color: #4f486b;
+}
+
+/* Basic Styling */
+body, html, .application, .application_bg, .component_wrapper {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	box-sizing: border-box;
+
+	color: #fff;
+	text-shadow: 0px 1px 0px rgba(0,0,0,.5);
+	font-family: 'Roboto', sans-serif;
+}
+
+.component_wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/* Header Styling */
+.application h1,
+.application h2 {
+	text-transform: uppercase;
+	font-size: 36px;
+	text-align: center;
+}
+
+.application h2 {
+	font-size: 20px;
+	color: rgba(255,255,255,0.5);
+}
+
+/* Button styling */
+button.secondary,
+button.primary {
+	background: #a55133;
+	border: 1px solid #a55133;
+	color: #fff;
+	border-radius: 4px;
+	text-shadow: 0px 1px 0px rgba(0,0,0,0.5)
+}
+
+button.secondary {
+	background: #2c2842;
+	border: 2px solid #375898;
+	box-shadow: 0px 0px 18px rgba(0,0,0,.2);
+	color: #fff;
+}
+
+button.primary:hover {
+	background: #cc6946;
+}
+
+button.secondary:hover {
+	background: #375898;
+	border: 2px solid #375898;
+	box-shadow: 0px 0px 18px rgba(0,0,0,.2);
+	color: #fff;
+}
+
+/* App Info */
+.app_info {
+	text-align: center;
+	color: rgba(255,255,255,0.3);
+	font-size: 15px;
+}
+
+/* Application Footer */
+.application_footer {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	text-align: center;
+	width: 100%;
+	font-size: 12px;
+	color: rgba(255,255,255,0.3);
+	padding: 0px 20px 10px;
+}
+
+/* Loading */
+.loading_panel {
+	background: rgba(32,29,49,0.6);
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+
+.loading_panel.active {
+	display: block;
+}
+
+.loading_roter,
+.loading_text {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin:-130px 0 0 -130px;
+}
+
+.loading_text {
+	margin: -35px 0 0 -60px;
+	text-align: center;
+	width: 115px;
+}
+
+.loading_text h4 {
+	font-size: 18px;
+	opacity: 0.3;
+}
+
+.loading_text p {
+	font-size: 40px;
+	color: #7c2e62;
+}
+
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+	from {
+	-ms-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-webkit-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	transform: rotate(0deg);
+	}
+	to {
+	-ms-transform: rotate(360deg);
+	-moz-transform: rotate(360deg);
+	-webkit-transform: rotate(360deg);
+	-o-transform: rotate(360deg);
+	transform: rotate(360deg);
+	}
+}
+@keyframes rotating {
+	from {
+	-ms-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-webkit-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	transform: rotate(0deg);
+	}
+	to {
+	-ms-transform: rotate(360deg);
+	-moz-transform: rotate(360deg);
+	-webkit-transform: rotate(360deg);
+	-o-transform: rotate(360deg);
+	transform: rotate(360deg);
+	}
+}
+.rotating {
+	-webkit-animation: rotating 2s linear infinite;
+	-moz-animation: rotating 2s linear infinite;
+	-ms-animation: rotating 2s linear infinite;
+	-o-animation: rotating 2s linear infinite;
+	animation: rotating 2s linear infinite;
+}
+
+/* Tooltip */
+.tool_tip {
+	opacity: 0;
+	width: 250px;
+	height: 0px;
+	bottom: 0px;
+	overflow: hidden;
+	background: #18152a;
+	font-size: 11px;
+	padding: 10px;
+	border-radius: 6px;
+	left: 62px;
+
+	position: absolute;
+	transition: all 0.5s ease;
+}
+
+.tool_tip.active {
+	opacity: 1;
+	width: 250px;
+	height: auto;
+	bottom: 80px;
+}
+
+/* Tooltip */
+.fog1, .fog2, .fog3, .fog4, .fog5 {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+
+	opacity: 0.3;
+}
+
+.fog1 {
+	-webkit-animation: fog1 12s linear infinite;
+	-moz-animation: fog1 12s linear infinite;
+	-ms-animation: fog1 12s linear infinite;
+	-o-animation: fog1 12s linear infinite;
+	animation: fog1 12s linear infinite;
+}
+
+.fog2 {
+	-webkit-animation: fog2 12s linear infinite;
+	-moz-animation: fog2 12s linear infinite;
+	-ms-animation: fog2 12s linear infinite;
+	-o-animation: fog2 12s linear infinite;
+	animation: fog2 12s linear infinite;
+}
+
+.fog3 {
+	-webkit-animation: fog3 15s linear infinite;
+	-moz-animation: fog3 15s linear infinite;
+	-ms-animation: fog3 15s linear infinite;
+	-o-animation: fog3 15s linear infinite;
+	animation: fog3 15s linear infinite;
+}
+
+.fog4 {
+	-webkit-animation: fog4 19s linear infinite;
+	-moz-animation: fog4 19s linear infinite;
+	-ms-animation: fog4 19s linear infinite;
+	-o-animation: fog4 19s linear infinite;
+	animation: fog4 19s linear infinite;
+
+	-webkit-animation-delay: 4s; /* Safari 4.0 - 8.0 */
+		animation-delay: 4s;
+}
+
+.fog5 {
+	-webkit-animation: fog5 35s linear infinite;
+	-moz-animation: fog5 35s linear infinite;
+	-ms-animation: fog5 35s linear infinite;
+	-o-animation: fog5 35s linear infinite;
+	animation: fog5 35s linear infinite;
+
+	-webkit-animation-delay: 3s; /* Safari 4.0 - 8.0 */
+		animation-delay: 3s;
+}

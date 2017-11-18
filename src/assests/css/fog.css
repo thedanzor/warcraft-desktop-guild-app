@@ -1,0 +1,115 @@
+@-webkit-keyframes fog1 {
+	0% {
+		opacity: 0.4;
+	}
+	30% {
+		opacity: 0.1;
+	}
+	60% {
+		opacity: 0.5;
+	}
+	100% {
+		opacity: 0.4;
+	}
+}
+@keyframes fog1 {
+	0% {
+		opacity: 0.4;
+	}
+	30% {
+		opacity: 0.1;
+	}
+	60% {
+		opacity: 0.5;
+	}
+	100% {
+		opacity: 0.4;
+	}
+}
+
+@-webkit-keyframes fog2 {
+	0% {
+		left: -300px;
+		opacity: 0.6;
+	}
+	100% {
+		left: 2000px;
+		opacity: 0.8;
+	}
+}
+@keyframes fog2 {
+	0% {
+		left: -300px;
+		opacity: 0.2;
+	}
+	100% {
+		left: 2000px;
+		opacity: 0.6;
+	}
+}
+
+@-webkit-keyframes fog3 {
+	0% {
+		left: -300px;
+		opacity: 0.5;
+	}
+	100% {
+		left: 2000px;
+		opacity: 0.8;
+	}
+}
+@keyframes fog3 {
+	0% {
+		left: -300px;
+		opacity: 0.2;
+	}
+	100% {
+		left: 2000px;
+		opacity: 0.6;
+	}
+}
+
+
+
+@-webkit-keyframes fog4 {
+	0% {
+		left: 0px;
+		opacity: 0.5;
+	}
+	100% {
+		left: 2000px;
+		opacity: 0.8;
+	}
+}
+@keyframes fog4 {
+	0% {
+		left: 0px;
+		opacity: 0.5;
+	}
+	100% {
+		left: 2000px;
+		opacity: 0.8;
+	}
+}
+
+
+@-webkit-keyframes fog5 {
+	0% {
+		left: -200px;
+		opacity: 0.6;
+	}
+	100% {
+		left: 2000px;
+		opacity: 0.1;
+	}
+}
+@keyframes fog5 {
+	0% {
+		left: -300px;
+		opacity: 0.6;
+	}
+	100% {
+		left: 2000px;
+		opacity: 0.1;
+	}
+}

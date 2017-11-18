@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>World of Warcraft - Guild Manager</title>
+
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+		<link rel="stylesheet" href="assests/font/font.css">
+
+		<link rel="stylesheet" href="assests/css/fog.css">
+		<link rel="stylesheet" href="assests/css/base.css">
+		<link rel="stylesheet" href="assests/css/app_login.css">
+	</head>
+	<body>
+		<div class="application">
+			<div class="application_bg"> </div>
+			<div class="fog1"><img src="assests/img/fog/fog1.png" /></div>
+			<div class="fog2"><img src="assests/img/fog/fog2.png" /></div>
+			<div class="fog3"><img src="assests/img/fog/fog3.png" /></div>
+
+			<div class="component_wrapper"></div>
+			<div class="application_loading"></div>
+
+			<div class="application_footer">
+				Warcraft is a trademarked product owned by Blizzard Entertainment, all material found relating to world of warcraft is copyright to blizzard. <br />
+				Blizzard is in no way shape or form connected or related to this product / service.
+			</div>
+
+			<audio repeat autoplay style="display: none;" >
+				<source src="assests/music.mp3" type="audio/mpeg">
+			</audio>
+		</div>
+		<script>
+			// Load the application
+			require('./app.js')
+		</script>
+	</body>
+</html>

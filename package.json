@@ -1,0 +1,34 @@
+{
+	"name": "Warcraft-guild-manager",
+	"version": "0.0.1",
+	"description": "A simple desktop application to browse and manage guilds",
+	"main": "src/init.js",
+	"scripts": {
+		"start": "electron ."
+	},
+	"ava": {
+		"verbose": true,
+		"require": [
+			"babel-register",
+			"./test/helpers/setup-browser-env.js"
+		],
+		"babel": "inherit",
+		"env": {
+			"development": {
+				"sourceMaps": "inline"
+			}
+		}
+	},
+	"author": "Scott Jones <scott@thedanzorlabs.com>",
+	"homepage": "https://the-danzor.deviantart.com",
+	"private": true,
+	"devDependencies": {
+		"ava": "^0.20.0",
+		"electron": "~1.7.8"
+	},
+	"env": {
+		"development": {
+			"sourceMaps": "inline"
+		}
+	}
+}
