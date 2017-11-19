@@ -8,7 +8,6 @@ const component_id = 'login';
 
 // @public - Login component
 const login = component_wrapper => {
-	console.log(component_wrapper);
 	// Handle State Change
 	on('stateChange', (change) => {
 		console.log(change);
@@ -23,7 +22,7 @@ const login = component_wrapper => {
 	// Render view;
 	component_wrapper.innerHTML = template;
 
-	// 
+	// Component logic starts here.
 }
 
 module.exports = login;

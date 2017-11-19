@@ -121,6 +121,17 @@ button.secondary:hover {
 	padding: 0px 20px 10px;
 }
 
+/* Application message */
+.application_message {
+	position: absolute;
+	top: 950px;
+	left: 0px;
+	width: 100%;
+	text-align: center;
+	color: #fff;
+	font-size: 1.3em;
+}
+
 /* Loading */
 .loading_panel {
 	background: rgba(32,29,49,0.6);
@@ -130,6 +141,8 @@ button.secondary:hover {
 	width: 100%;
 	height: 100%;
 	display: none;
+
+	z-index: 9999;
 }
 
 .loading_panel.active {
@@ -156,7 +169,8 @@ button.secondary:hover {
 }
 
 .loading_text p {
-	font-size: 40px;
+	font-size: 36px;
+	margin-top: 10px;
 	color: #7c2e62;
 }
 
@@ -265,7 +279,7 @@ button.secondary:hover {
 	animation: fog4 19s linear infinite;
 
 	-webkit-animation-delay: 4s; /* Safari 4.0 - 8.0 */
-		animation-delay: 4s;
+	animation-delay: 4s;
 }
 
 .fog5 {
@@ -276,5 +290,5 @@ button.secondary:hover {
 	animation: fog5 35s linear infinite;
 
 	-webkit-animation-delay: 3s; /* Safari 4.0 - 8.0 */
-		animation-delay: 3s;
+	animation-delay: 3s;
 }
