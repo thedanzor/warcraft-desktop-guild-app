@@ -2,6 +2,9 @@
 const login_component = require('./components/login');
 const setup_component = require('./components/setup');
 
+// Bnet oAuth
+const bnet = require('./bnet/bnet');
+
 // Application Utils
 const { getState, setState } = require('./utils/application_state');
 const { on, emit } = require('./utils/application_events');
@@ -28,6 +31,9 @@ const application_start = () => {
 	if (true) {
 		appState.init = false;
 	}
+
+	// oAuth
+	bnet();
 
 	// Set the application state
 	setState(appState);
