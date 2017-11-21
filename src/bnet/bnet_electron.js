@@ -6,112 +6,105 @@ const nodeUrl = require('url');
 const electron = require('electron');
 const BrowserWindow = electron.BrowserWindow || electron.remote.BrowserWindow;
 
-var generateRandomString = function (length) {
-	var text = '';
-	var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+// We are going to store the credentials here.
+let CONFIG = {};
+let windowParams;
 
-	for (var i = 0; i < length; i++) {
-		text += possible.charAt(Math.floor(Math.random() * possible.length));
-	}
-
-	return text;
+// We want the user to pass along the API key and other info.
+const init = (options, windowParams) => {
+	CONFIG = options;
+	windowParams = windowParams;
 };
 
-module.exports = function (urls, config, windowParams) {
-	function getAuthorizationCode(opts) {
-		opts = opts || {};
+// Get the Authentication code we need to grab tokens.
+const getAuthorizationCode = () => {
 
-		var url = urls.authorizationUrl + '?' + queryString.stringify(config);
-
-		return new Promise(function (resolve, reject) {
-			const authWindow = new BrowserWindow(windowParams || {'use-content-size': true});
-			authWindow.loadURL(url);
-			authWindow.show();
-
-			authWindow.on('closed', () => {
-				reject(new Error('window was closed by user'));
-			});
-
-			function onCallback(url) {
-				var url_parts = nodeUrl.parse(url, true);
-				console.log(url_parts);
-				var query = url_parts.query;
-				var code = query.code;
-				var error = query.error;
-
-				if (error !== undefined) {
-					reject(error);
-					authWindow.removeAllListeners('closed');
-					setImmediate(function () {
-						authWindow.close();
-					});
-				} else if (code) {
-					resolve(code);
-					authWindow.removeAllListeners('closed');
-					setImmediate(function () {
-						authWindow.close();
-					});
-				}
-			}
-
-			authWindow.webContents.on('will-navigate', (event, url) => {
-				onCallback(url);
-			});
-
-			authWindow.webContents.on('did-get-redirect-request', (event, oldUrl, newUrl) => {
-				onCallback(newUrl);
-			});
-		});
+	const options = {
+		client_id: CONFIG.client_id,
+		client_secret: CONFIG.client_secret,
+		redirect_uri: CONFIG.redirect_uri,
+		response_type: 'code',
+		scope: CONFIG.scope
 	}
 
-	function tokenRequest(data) {
-		const header = {
-			'Accept': 'application/json',
-			'Content-Type': 'application/x-www-form-urlencoded'
-		};
+	const url = CONFIG.authorizationUrl + '?' + queryString.stringify(options);
 
-		if (config.useBasicAuthorizationHeader) {
-			header.Authorization = 'Basic ' + new Buffer(config.clientId + ':' + config.clientSecret).toString('base64');
-		} else {
-			objectAssign(data, {
-				client_id: config.clientId,
-				client_secret: config.clientSecret
-			});
+	return new Promise(function (resolve, reject) {
+		const authWindow = new BrowserWindow(windowParams || {'use-content-size': true});
+		authWindow.loadURL(url);
+		authWindow.show();
+
+		authWindow.on('closed', () => {
+			reject(new Error('window was closed by user'));
+		});
+
+		function onCallback(url) {
+			const url_parts = nodeUrl.parse(url, true);
+			const query = url_parts.query;
+			const code = query.code;
+			const error = query.error;
+
+			if (error !== undefined) {
+				// Return error
+				reject(error);
+
+				authWindow.removeAllListeners('closed');
+				setImmediate(function () {
+					authWindow.close();
+				});
+
+			} else if (code) {
+				CONFIG.code = code;
+
+				// Return resolved
+				resolve(code);
+
+				authWindow.removeAllListeners('closed');
+				setImmediate(function () {
+					authWindow.close();
+				});
+
+			}
 		}
 
-		return fetch(config.tokenUrl, {
-			method: 'POST',
-			headers: header,
-			body: queryString.stringify(data)
-		}).then(res => {
-			return res.json();
+		authWindow.webContents.on('will-navigate', (event, url) => {
+			onCallback(url);
 		});
-	}
 
-	function getAccessToken(opts) {
-		return getAuthorizationCode(opts)
-			.then(authorizationCode => {
-				var tokenRequestData = {
-					code: authorizationCode,
-					grant_type: 'authorization_code',
-					redirect_uri: config.redirectUri
-				};
-				tokenRequestData = Object.assign(tokenRequestData, opts.additionalTokenRequestData);
-				return tokenRequest(tokenRequestData);
-			});
-	}
-
-	function refreshToken(refreshToken) {
-		return tokenRequest({
-			refresh_token: refreshToken,
-			grant_type: 'refresh_token',
-			redirect_uri: config.redirectUri
+		authWindow.webContents.on('did-get-redirect-request', (event, oldUrl, newUrl) => {
+			onCallback(newUrl);
 		});
-	}
+	});
+};
 
-	return {
-		getAuthorizationCode: getAuthorizationCode,
-		getAccessToken: getAccessToken,
-		refreshToken: refreshToken
+// Get access tokens in the background.
+const getAccessToken = () => {
+	const header = {
+		'Accept': 'application/json',
+		'Content-Type': 'application/x-www-form-urlencoded'
 	};
+
+	const data = {
+		code: CONFIG.code,
+		client_id: CONFIG.client_id,
+		client_secret: CONFIG.client_secret,
+		grant_type: 'authorization_code',
+		scope: CONFIG.scope,
+		redirect_uri: CONFIG.redirect_uri
+	}
+
+	const url = CONFIG.tokenUrl + '?' + queryString.stringify(data);
+
+	return fetch(url, {
+		method: 'POST',
+		headers: header
+	}).then(res => {
+		return res.json();
+	});
+}
+
+module.exports = {
+	init,
+	getAuthorizationCode,
+	getAccessToken
 };

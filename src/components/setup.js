@@ -17,7 +17,8 @@ const setup = component_wrapper => {
 	});
 
 	const componentState = {
-		api: '',
+		client_id: '',
+		client_secret: '',
 		guild: '',
 		server: ''
 	};
@@ -39,6 +40,7 @@ const setup = component_wrapper => {
 
 	// Validate commponent is ready
 	const apiField = component_wrapper.querySelector('.api_field');
+	const secretField = component_wrapper.querySelector('.secret_field');
 	const guildField = component_wrapper.querySelector('.guild_field');
 	const serverField = component_wrapper.querySelector('.server_field');
 	const submitButton = component_wrapper.querySelector('.submit_button');
@@ -53,7 +55,14 @@ const setup = component_wrapper => {
 		if (target) {
 			const { value } = target;
 
-			componentState.api = value;
+			componentState.client_id = value;
+		}
+	});
+	secretField.addEventListener('input', ({ target }) => {
+		if (target) {
+			const { value } = target;
+
+			componentState.client_secret = value;
 		}
 	});
 	guildField.addEventListener('input', ({ target }) => {
@@ -72,6 +81,7 @@ const setup = component_wrapper => {
 	});
 
 	submitButton.addEventListener('click', () => {
+		console.log('STATE', componentState)
 		validateDetails(componentState);
 	});
 

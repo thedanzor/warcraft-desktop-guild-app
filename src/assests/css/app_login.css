@@ -104,18 +104,26 @@
 	width: 100%;
 }
 
-.setup_wrapper input.small {
+.setup_wrapper input.small,
+.setup_wrapper input.med {
 	width: 40%;
-	margin: 0px 10px 0 0;
+	margin: 20px 10px 0 0;
 	float: left;
 
 	min-width: 0;
+}
+
+.setup_wrapper input.med {
+	width: 48%;
 }
 
 .setup_wrapper button {
 	width: auto;
 	min-width: auto;
 	margin: 4px 0 0 0;
+
+	position: relative;
+	top: 22px;
 }
 
 .setup_wrapper p {
