@@ -21,7 +21,7 @@ const setCorrectApp = (newState) => {
 	state.app.activeComponent = newState.id;
 	updateDom(newState.id);
 
-	emit('stateChange', {
+	emit('state_change', {
 		setComponent: newState.id
 	})
 };

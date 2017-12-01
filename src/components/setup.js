@@ -3,24 +3,15 @@ const { getState, setState } = require('../utils/application_state');
 const { on, emit } = require('../utils/application_events');
 const message = require('../components/message');
 const template = require('../views/setup');
-const getData = require('../utils/request');
-const validateDetails = require('../utils/init_validate');
 
 // Set component id.
 const component_id = 'setup';
 
 // @public - Login component
 const setup = component_wrapper => {
-	// Handle State Change
-	on('stateChange', (change) => {
-		// DO SOMETHING.
-	});
-
 	const componentState = {
 		client_id: '',
 		client_secret: '',
-		guild: '',
-		server: ''
 	};
 
 	// We do not want to brute-force the DOM with innerHTML
@@ -33,19 +24,12 @@ const setup = component_wrapper => {
 	component_wrapper.querySelector('.login_panel').append(templateWrapper);
 	message('Initializing App...');
 
-	// Fade in component
-	setTimeout(() => {
-		component_wrapper.querySelector('.setup_inner').className += ' display';
-	}, 2000);
-
 	// Validate commponent is ready
 	const apiField = component_wrapper.querySelector('.api_field');
 	const secretField = component_wrapper.querySelector('.secret_field');
-	const guildField = component_wrapper.querySelector('.guild_field');
-	const serverField = component_wrapper.querySelector('.server_field');
 	const submitButton = component_wrapper.querySelector('.submit_button');
 
-	if (!apiField || !guildField || !serverField || !submitButton) {
+	if (!apiField || !secretField) {
 		message('Error Initializing App');
 		return;
 	}
@@ -65,79 +49,20 @@ const setup = component_wrapper => {
 			componentState.client_secret = value;
 		}
 	});
-	guildField.addEventListener('input', ({ target }) => {
-		if (target) {
-			const { value } = target;
-
-			componentState.guild = value;
-		}
-	});
-	serverField.addEventListener('input', ({ target }) => {
-		if (target) {
-			const { value } = target;
-
-			componentState.server = value;
-		}
-	});
 
 	submitButton.addEventListener('click', () => {
-		validateDetails(componentState);
+		message('Signing in to battle.net to authenticate');
+
+		emit('authenticate', {
+			client_id: componentState.client_id,
+			client_secret: componentState.client_secret
+		});
+
+		on('authenticated', () => {
+			message('You can now login using your battle.net account');
+			templateWrapper.setAttribute('style', 'display: none;');
+		})
 	});
-
-	// On Success
-	on('Initialized', (data) => {
-		// Show loading
-		component_wrapper.querySelector('.loading_panel').className += ' active';
-
-		// Get state and update initial loading state.
-		const state = getState();
-		const credentials = state.credentials;
-		const current = component_wrapper.querySelector('.num_in');
-		const outOf = component_wrapper.querySelector('.num_of');
-		outOf.innerHTML = data.members.length;
-
-		// Helper function for building url for characters.
-		const buildCharacterUrl = function (character) {
-			// Build API URL for the member
-			const url = 'https://eu.api.battle.net' + '/wow/character/' +
-				character.realm + '/' +
-				character.name + '?fields=items&locale=en_GB&apikey=' +
-				credentials.client_id;
-			return url;
-		};
-
-		// We look through the members in a way we can output the data.
-		let iterations = 0;
-		let characters = [];
-		function processMember ({character}) {
-			iterations++
-			current.innerHTML = iterations;
-
-			if (!character) {
-				message('Successfully grabbed all max-level characters');
-			} else {
-				if (character.level !== 110) {
-					processMember(data.members[iterations]);
-					message('Skipping none max-level character');
-				} else {
-					const memberUrl = buildCharacterUrl(character);
-
-					message('Processing Character: ' + character.name);
-
-					getData(memberUrl).then( (response) => {
-						characters.push(response);
-						processMember(data.members[iterations]);
-					}, (error) => {
-						processMember(data.members[iterations]);
-					});
-
-				}
-			}
-		};
-
-		processMember(data.members[iterations])
-	})
-
 }
 
 module.exports = setup;

@@ -25,15 +25,6 @@ module.exports = `
 				</form>
 			</div>
 			<img src="assests/img/or.png" class="login_or" />
-			<div class="loading_panel">
-				<div class="loading_roter">
-					<img class="rotating" src="assests/img/loading.png" />
-					<div class="loading_text">
-						<h4> Processing </h4>
-						<p> <span class="num_in"> 0 </span> / <span class="num_of"> 0 </span> </p>
-					</div>
-				</div>
-			</div>
 		</div>
 		<div class="app_info"> Warcraft Guild Manager is an Open Sourced Javascript application. Created by Scott Jones </div>
 	</div>

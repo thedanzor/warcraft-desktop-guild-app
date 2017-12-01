@@ -1,6 +1,6 @@
 {
 	"name": "Warcraft-guild-manager",
-	"version": "0.0.1",
+	"version": "0.2.1",
 	"description": "A simple desktop application to browse and manage guilds",
 	"main": "src/init.js",
 	"scripts": {

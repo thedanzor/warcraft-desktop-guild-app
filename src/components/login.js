@@ -1,7 +1,9 @@
 // Application components / utils.
 const { getState, setState } = require('../utils/application_state');
 const { on, emit } = require('../utils/application_events');
+const getData = require('../utils/request');
 const template = require('../views/login');
+const message = require('../components/message');
 
 // Set component id.
 const component_id = 'login';
@@ -17,7 +19,47 @@ const login = component_wrapper => {
 	// Render view;
 	component_wrapper.innerHTML = template;
 
-	// Component logic starts here.
+	const loginButton = document.querySelector('.login-bnet');
+
+	// Component logic starts here
+	loginButton.addEventListener('click', () => {
+		const body = document.querySelector('body');
+		// Setup login state.
+		message('Signing in to battle.net to authenticate');
+		component_wrapper.querySelector('.app_login').setAttribute('style', 'opacity: 0.6;');
+		body.className += 'loading';
+
+		// Get the token ready for login.
+		const appState = getState();
+		const accessToken = appState.credentials.token;
+
+		const tokenUrl = 'https://eu.api.battle.net/wow/user/characters?access_token=';
+		const requestUrl = tokenUrl + accessToken.access_token;
+
+		// Try logging in.
+		getData(requestUrl).then( (response) => {
+			console.log(response);
+			body.className = '';
+			message('Success, processing your account');
+		}, (error) => {
+			message('Error Signing in, trying again');
+
+			on('re_authenticated', (response) => {
+				const newRequestUrl = tokenUrl + response.access_token;
+				message('Logging in again');
+
+				getData(newRequestUrl).then( (response) => {
+					console.log(response);
+					body.className = '';
+					message('Success, processing your account');
+				}, (error) => {
+					message('There is an error with your account');
+				})
+			})
+
+			emit('re_authenticate', appState.credentials);
+		})
+	});
 }
 
 module.exports = login;

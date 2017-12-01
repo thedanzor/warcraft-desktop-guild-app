@@ -1,27 +1,13 @@
-const Datastore = require('nedb');
-const db = new Datastore({ filename: './data/guilds.db', autoload: true });
-
-// App dependencies
-const getData = require('./request');
-const { on, emit } = require('../utils/application_events');
+// Application components / utils.
 const { getState, setState } = require('../utils/application_state');
+const { on, emit } = require('../utils/application_events');
+const message = require('../components/message');
+const getData = require('../utils/request');
 const message = require('../components/message');
 
-// @public - Validate
-const validate = ({client_id, client_secret, server, guild}) => {
-	if (!client_id || !client_secret || !server || !guild) {
-		message('All fields are needed to continue...');
-		return;
-	}
-
-	message('Signing in to battle.net to authenticate');
-
-	emit('authenticate', {
-		client_id: client_id,
-		client_secret: client_secret
-	});
-
-	on('authenticated', (token) => {
+// @public - Fetch Guild
+const fetchGuild = () => {
+	on('fetch_guild', (token) => {
 		message('Checking Warcraft database for guild');
 
 		// Set Token
@@ -66,4 +52,4 @@ const validate = ({client_id, client_secret, server, guild}) => {
 	})
 }
 
-module.exports = validate;
+module.exports = fetchGuild;

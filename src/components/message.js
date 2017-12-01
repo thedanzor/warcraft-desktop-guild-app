@@ -8,11 +8,6 @@ const wrapper = document.querySelector('.application_message');
 
 // @public - Login component
 const message = (message) => {
-	// Handle State Change
-	on('stateChange', (change) => {
-		// Do something on state change
-	});
-
 	// Display the message
 	if (message) {
 		wrapper.innerHTML = message;

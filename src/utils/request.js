@@ -7,7 +7,7 @@ const getData = (url) => {
 				body = JSON.parse(body);
 				resolve(body);
 			} else {
-				reject(Error("Not found"));
+				reject(error);
 			}
 		})
 	});

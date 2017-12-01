@@ -87,11 +87,9 @@
 .setup_wrapper .setup_inner {
 	background: #201d32;
 	padding: 35px;
-	opacity: 0;
+	opacity: 1;
 	height: 100%;
 	border-radius: 8px;
-
-	transition: opacity 1s ease;
 }
 
 .setup_wrapper h3 {
@@ -129,10 +127,6 @@
 .setup_wrapper p {
 	opacity: 0.5;
 	font-size: 0.8em;
-}
-
-.setup_wrapper .setup_inner.display {
-	opacity: 1;
 }
 
 .login_panel .battlenet,

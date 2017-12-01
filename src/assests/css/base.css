@@ -13,6 +13,10 @@ h1, h2, h3, h4, h5 {
 	font-weight: 50;
 }
 
+body.loading {
+	cursor: wait;
+}
+
 button {
 	padding: 14px 18px;
 	cursor: pointer;

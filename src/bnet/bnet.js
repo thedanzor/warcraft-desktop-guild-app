@@ -26,8 +26,7 @@ const battleNet = () => {
 		}
 	}
 
-	// We have been asked to authenticate a user.
-	on('authenticate', ({client_id, client_secret}) => {
+	const authenticate = ({client_id, client_secret, verified_credentials}, done) => {
 		config.client_id = client_id;
 		config.client_secret = client_secret;
 
@@ -36,14 +35,32 @@ const battleNet = () => {
 			.then(response => {
 				bnetAuth.getAccessToken()
 					.then(response => {
-						emit('verified_credentials', config);
-						emit('authenticated', response);
+						// If we have already verified them, no need to do it again.
+						if (!verified_credentials) {
+							emit('verified_credentials', config);
+						}
+						done(response)
 					}, function(reason) {
 						message('ERROR: could not secure an access token');
 					});
 			}, function(reason) {
 				message('ERROR: Invalid client_id and client_secret');
 			});
+	};
+
+	// We have been asked to authenticate a user.
+	on('authenticate', (data) => {
+		authenticate(data, (response) => {
+			emit('authenticated', response);
+		});
+	});
+
+	// We have been asked to re-authenticate a user.
+	on('re_authenticate', (data) => {
+		data.verified_credentials = true;
+		authenticate(data, (response) => {
+			emit('re_authenticated', response);
+		});
 	});
 };
 
