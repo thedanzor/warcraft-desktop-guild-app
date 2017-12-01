@@ -36,6 +36,7 @@ const battleNet = () => {
 			.then(response => {
 				bnetAuth.getAccessToken()
 					.then(response => {
+						emit('verified_credentials', config);
 						emit('authenticated', response);
 					}, function(reason) {
 						message('ERROR: could not secure an access token');

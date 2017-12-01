@@ -17,10 +17,12 @@ let mainWindow;
 function createWindow () {
 	// Create the browser window.
 	mainWindow = new BrowserWindow({
-		autoHideMenuBar: true
+		autoHideMenuBar: true,
+		width: 2600,
+		height: 1500
 	});
 
-	mainWindow.setFullScreen(true);
+	// mainWindow.setFullScreen(true);
 
 	// and load the index.html of the app.
 	mainWindow.loadURL(
@@ -36,7 +38,7 @@ function createWindow () {
 		mainWindow = null
 	});
 
-	mainWindow.webContents.openDevTools();
+	// mainWindow.webContents.openDevTools();
 };
 
 // When application is ready we create a new window.

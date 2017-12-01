@@ -8,11 +8,6 @@ const component_id = 'login';
 
 // @public - Login component
 const login = component_wrapper => {
-	// Handle State Change
-	on('stateChange', (change) => {
-		console.log(change);
-	});
-
 	// We are Initializing so we setup our initial state.
 	setState({
 		id: component_id,

@@ -33,6 +33,7 @@
 		}
 	},
 	"dependencies": {
+		"nedb": "^1.8.0",
 		"node-fetch": "^1.3.3",
 		"object-assign": "^4.0.1",
 		"pinkie-promise": "^2.0.0"

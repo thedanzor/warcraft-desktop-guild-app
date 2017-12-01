@@ -81,7 +81,6 @@ const setup = component_wrapper => {
 	});
 
 	submitButton.addEventListener('click', () => {
-		console.log('STATE', componentState)
 		validateDetails(componentState);
 	});
 
@@ -92,7 +91,7 @@ const setup = component_wrapper => {
 
 		// Get state and update initial loading state.
 		const state = getState();
-		const appState = state.app;
+		const credentials = state.credentials;
 		const current = component_wrapper.querySelector('.num_in');
 		const outOf = component_wrapper.querySelector('.num_of');
 		outOf.innerHTML = data.members.length;
@@ -103,14 +102,14 @@ const setup = component_wrapper => {
 			const url = 'https://eu.api.battle.net' + '/wow/character/' +
 				character.realm + '/' +
 				character.name + '?fields=items&locale=en_GB&apikey=' +
-				appState.key;
+				credentials.client_id;
 			return url;
 		};
 
 		// We look through the members in a way we can output the data.
 		let iterations = 0;
+		let characters = [];
 		function processMember ({character}) {
-			console.log(character);
 			iterations++
 			current.innerHTML = iterations;
 
@@ -123,12 +122,12 @@ const setup = component_wrapper => {
 				} else {
 					const memberUrl = buildCharacterUrl(character);
 
-					message('Processing Character' + character.name);
+					message('Processing Character: ' + character.name);
 
 					getData(memberUrl).then( (response) => {
+						characters.push(response);
 						processMember(data.members[iterations]);
 					}, (error) => {
-						message('ERROR! Processing Character' + character.name);
 						processMember(data.members[iterations]);
 					});
 
