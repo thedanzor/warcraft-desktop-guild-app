@@ -20,6 +20,8 @@ This is a project using ElectronJs, NodeJs, NPM, ES6 and AvaJS to build a deskto
 
 The goal is to build a fully working application that will enable guild masters to mange their guilds. While also open sourcing the code so developers can take advantage of the code in the various stages for their own projects.
 
+Guild Masters and Officers will have the ability to manage events, dkp, raid rosters and potentially more in the initial release. 
+
 Updates will be sparatic as work on this is done in my limited spare time.
 
 Video on how the design was made:
@@ -32,8 +34,6 @@ https://www.youtube.com/watch?v=_9JbZNU7BSc (0.1)
 
 Desired Features
 -------------
-* Store API and guild information locally
-* Use blizzard oAuth to login to battle.net accounts or manage accounts locally
 * Export guild information in an easy format, between guild members
 * DKP management
 * Event management
