@@ -42,11 +42,8 @@ const login = component_wrapper => {
 			body.className = '';
 			message('Success, processing your account');
 		}, (error) => {
-			message('Error Signing in, trying again');
-
 			on('re_authenticated', (response) => {
 				const newRequestUrl = tokenUrl + response.access_token;
-				message('Logging in again');
 
 				getData(newRequestUrl).then( (response) => {
 					console.log(response);
