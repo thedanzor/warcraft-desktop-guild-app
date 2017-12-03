@@ -42,22 +42,17 @@ function createWindow () {
 };
 
 // When application is ready we create a new window.
-app.on('ready', createWindow)
+app.on('ready', createWindow);
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
 	if (process.platform !== 'darwin') {
 		app.quit()
 	}
-})
+});
 
 app.on('activate', function () {
 	if (mainWindow === null) {
 		createWindow()
 	}
-})
-
-// Custom event - Closing the application
-on('closeApp', () => {
-	app.quit();
 });

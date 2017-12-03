@@ -65,6 +65,20 @@ body, html, .application, .application_bg, .component_wrapper {
 	left: 0;
 }
 
+/* Close App */
+.close_app {
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	padding: 12px;
+	color: #fff;
+	border-radius: 8px;
+	background: rgba(0,0,0,0.2);
+	cursor: pointer;
+}
+
+.close_app span {font-weight: bold;}
+
 /* Header Styling */
 .application h1,
 .application h2 {

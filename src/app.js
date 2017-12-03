@@ -1,3 +1,4 @@
+const electron = require('electron').remote;
 const Datastore = require('nedb');
 const db = new Datastore({ filename: './data/app.db', autoload: true });
 
@@ -66,5 +67,10 @@ const application_start = () => {
 		// Write to the database to store the credentials for later.
 		db.update({ 'desktop_app_setup': 'yes' }, credentials, {}, (error, numberReplaced) => {});
 	});
+
+	document.querySelector('.close_app').addEventListener('click', () => {
+		const currentWindow = electron.getCurrentWindow();
+		currentWindow.close();
+	})
 };
 application_start();
