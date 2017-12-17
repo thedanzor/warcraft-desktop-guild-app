@@ -1,9 +1,11 @@
 // Application components / utils.
-const { getState, setState } = require('../utils/application_state');
-const { on, emit } = require('../utils/application_events');
-const getData = require('../utils/request');
-const template = require('../views/login');
-const message = require('../components/message');
+const { getState, setState } = require('../../utils/application_state');
+const { on, emit } = require('../../utils/application_events');
+const getData = require('../../utils/request');
+const message = require('../message/');
+
+// Template
+const template = require('./view_login');
 
 // Set component id.
 const component_id = 'login';

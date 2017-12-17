@@ -1,10 +1,10 @@
 // Application components / utils.
-const { getState, setState } = require('../utils/application_state');
-const { on, emit } = require('../utils/application_events');
-const getData = require('../utils/request');
-const message = require('../components/message');
+const { getState, setState } = require('../../utils/application_state');
+const { on, emit } = require('../../utils/application_events');
+const getData = require('../../utils/request');
+const message = require('../message/');
 
-const template = require('../views/loading');
+const template = require('../../views/loading');
 
 // When done we want to close the component.
 const clearcomponent = () => {

@@ -1,11 +1,11 @@
-const electron = require('electron').remote;
 const Datastore = require('nedb');
-const db = new Datastore({ filename: './data/app.db', autoload: true });
+const electron = require('electron').remote;
+const db = new Datastore({ filename: './build/data/app.db', autoload: true });
 
 // Appication Components
-const login_component = require('./components/login');
-const setup_component = require('./components/setup');
-const fetch_members = require('./components/fetch_members');
+const login_component = require('./components/login/');
+const setup_component = require('./components/login/setup');
+const fetch_members = require('./components/fetchers/fetch_members');
 
 // Bnet oAuth
 const bnet = require('./bnet/bnet');
@@ -71,6 +71,6 @@ const application_start = () => {
 	document.querySelector('.close_app').addEventListener('click', () => {
 		const currentWindow = electron.getCurrentWindow();
 		currentWindow.close();
-	})
+	});
 };
 application_start();

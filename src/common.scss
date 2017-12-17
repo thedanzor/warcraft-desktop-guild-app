@@ -1,4 +1,3 @@
-/* CSS reset */
 body, html, p, div, h1, h2, h3, h4, h5, a, input, button, textarea {
 	display: block;
 	padding: 0px;
@@ -34,20 +33,19 @@ input {
 	border-bottom: 1px solid #2e2a42;
 }
 
-input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+input::-webkit-input-placeholder {
 	color: #4f486b;
 }
-input::-moz-placeholder { /* Firefox 19+ */
+input::-moz-placeholder {
 	color: #4f486b;
 }
-input:-ms-input-placeholder { /* IE 10+ */
+input:-ms-input-placeholder {
 	color: #4f486b;
 }
-input:-moz-placeholder { /* Firefox 18- */
+input:-moz-placeholder {
 	color: #4f486b;
 }
 
-/* Basic Styling */
 body, html, .application, .application_bg, .component_wrapper {
 	width: 100%;
 	height: 100%;
@@ -65,7 +63,6 @@ body, html, .application, .application_bg, .component_wrapper {
 	left: 0;
 }
 
-/* Close App */
 .close_app {
 	position: absolute;
 	top: 30px;
@@ -79,7 +76,6 @@ body, html, .application, .application_bg, .component_wrapper {
 
 .close_app span {font-weight: bold;}
 
-/* Header Styling */
 .application h1,
 .application h2 {
 	text-transform: uppercase;
@@ -92,7 +88,6 @@ body, html, .application, .application_bg, .component_wrapper {
 	color: rgba(255,255,255,0.5);
 }
 
-/* Button styling */
 button.secondary,
 button.primary {
 	background: #a55133;
@@ -120,14 +115,12 @@ button.secondary:hover {
 	color: #fff;
 }
 
-/* App Info */
 .app_info {
 	text-align: center;
 	color: rgba(255,255,255,0.3);
 	font-size: 15px;
 }
 
-/* Application Footer */
 .application_footer {
 	position: absolute;
 	bottom: 0px;
@@ -139,7 +132,6 @@ button.secondary:hover {
 	padding: 0px 20px 10px;
 }
 
-/* Application message */
 .application_message {
 	position: absolute;
 	bottom: 7%;
@@ -150,7 +142,6 @@ button.secondary:hover {
 	font-size: 1.3em;
 }
 
-/* Loading */
 .loading_panel {
 	background: rgba(32,29,49,0.6);
 	position: absolute;
@@ -192,7 +183,7 @@ button.secondary:hover {
 	color: #7c2e62;
 }
 
-@-webkit-keyframes rotating /* Safari and Chrome */ {
+@-webkit-keyframes rotating {
 	from {
 	-ms-transform: rotate(0deg);
 	-moz-transform: rotate(0deg);
@@ -232,7 +223,6 @@ button.secondary:hover {
 	animation: rotating 2s linear infinite;
 }
 
-/* Tooltip */
 .tool_tip {
 	opacity: 0;
 	width: 250px;
@@ -256,7 +246,6 @@ button.secondary:hover {
 	bottom: 80px;
 }
 
-/* Tooltip */
 .fog1, .fog2, .fog3, .fog4, .fog5 {
 	position: absolute;
 	bottom: 0px;
@@ -296,7 +285,7 @@ button.secondary:hover {
 	-o-animation: fog4 19s linear infinite;
 	animation: fog4 19s linear infinite;
 
-	-webkit-animation-delay: 4s; /* Safari 4.0 - 8.0 */
+	-webkit-animation-delay: 4s;
 	animation-delay: 4s;
 }
 
@@ -307,6 +296,122 @@ button.secondary:hover {
 	-o-animation: fog5 35s linear infinite;
 	animation: fog5 35s linear infinite;
 
-	-webkit-animation-delay: 3s; /* Safari 4.0 - 8.0 */
+	-webkit-animation-delay: 3s;
 	animation-delay: 3s;
+}
+
+@-webkit-keyframes fog1 {
+	0% {
+		opacity: 0.4;
+	}
+	30% {
+		opacity: 0.1;
+	}
+	60% {
+		opacity: 0.5;
+	}
+	100% {
+		opacity: 0.4;
+	}
+}
+@keyframes fog1 {
+	0% {
+		opacity: 0.4;
+	}
+	30% {
+		opacity: 0.1;
+	}
+	60% {
+		opacity: 0.5;
+	}
+	100% {
+		opacity: 0.4;
+	}
+}
+
+@-webkit-keyframes fog2 {
+	0% {
+		left: -300px;
+		opacity: 0.6;
+	}
+	100% {
+		left: 2000px;
+		opacity: 0.8;
+	}
+}
+@keyframes fog2 {
+	0% {
+		left: -300px;
+		opacity: 0.2;
+	}
+	100% {
+		left: 2000px;
+		opacity: 0.6;
+	}
+}
+
+@-webkit-keyframes fog3 {
+	0% {
+		left: -300px;
+		opacity: 0.5;
+	}
+	100% {
+		left: 2000px;
+		opacity: 0.8;
+	}
+}
+@keyframes fog3 {
+	0% {
+		left: -300px;
+		opacity: 0.2;
+	}
+	100% {
+		left: 2000px;
+		opacity: 0.6;
+	}
+}
+
+
+
+@-webkit-keyframes fog4 {
+	0% {
+		left: 0px;
+		opacity: 0.5;
+	}
+	100% {
+		left: 2000px;
+		opacity: 0.8;
+	}
+}
+@keyframes fog4 {
+	0% {
+		left: 0px;
+		opacity: 0.5;
+	}
+	100% {
+		left: 2000px;
+		opacity: 0.8;
+	}
+}
+
+
+@-webkit-keyframes fog5 {
+	0% {
+		left: -200px;
+		opacity: 0.6;
+	}
+	100% {
+		left: 2000px;
+		opacity: 0.1;
+	}
+}
+@keyframes fog5 {
+	0% {
+		left: -300px;
+		opacity: 0.6;
+	}
+	100% {
+		left: 2000px;
+		opacity: 0.1;
+	}
 }

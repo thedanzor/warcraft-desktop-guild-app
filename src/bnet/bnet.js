@@ -3,7 +3,7 @@ const bnetAuth = require('./bnet_electron');
 
 // App utils
 const { on, emit } = require('../utils/application_events');
-const message = require('../components/message');
+const message = require('../components/message/');
 
 // Login and Authenticate with Bnet
 const battleNet = () => {

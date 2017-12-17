@@ -1,6 +1,6 @@
 // Application components / utils.
-const { getState, setState } = require('../utils/application_state');
-const { on, emit } = require('../utils/application_events');
+const { getState, setState } = require('../../utils/application_state');
+const { on, emit } = require('../../utils/application_events');
 
 // Set component id.
 const component_id = 'message';

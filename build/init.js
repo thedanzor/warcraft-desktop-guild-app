@@ -3,9 +3,6 @@ const electron = require('electron');
 const path = require('path');
 const url = require('url');
 
-// App Dependencies
-const { on, emit } = require('./utils/application_events');
-
 // Application variables
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
