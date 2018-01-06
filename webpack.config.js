@@ -1,11 +1,11 @@
-let webpack = require('webpack');
-let path = require('path');
-let libraryName = 'app';
-let outputFile = libraryName + '.js';
+const webpack = require('webpack');
+const path = require('path');
+const libraryName = 'app';
+const outputFile = libraryName + '.js';
 
-let ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-let config = {
+const config = {
 	entry: __dirname + '/src/app.scss',
 	devtool: 'source-map',
 	output: {

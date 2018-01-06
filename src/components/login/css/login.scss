@@ -1,14 +1,9 @@
-.app_login {display: none;}
-
+.application,
 .application.login {
 	background: url('./components/login/img/app/login_bg.jpg') top center;
 	background-size: cover;
 
-  .app_login {
-  	display: block;
-  }
-
-  .application_bg {
+	.application_bg {
   	background: url('./components/login/img/app/login_bg2.jpg') top center;
   	background-size: cover;
   	opacity: 0;
@@ -18,6 +13,14 @@
   	-ms-animation: loginbg 6s linear infinite;
   	-o-animation: loginbg 6s linear infinite;
   	animation: loginbg 6s linear infinite;
+  }
+}
+
+.application.login_account,
+.application.login_guild,
+.application.login {
+  .app_login {
+  	display: block;
   }
 
   .component_wrapper {

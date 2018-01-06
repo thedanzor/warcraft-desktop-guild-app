@@ -8,20 +8,14 @@ const template = require('./view_setup');
 const component_id = 'setup';
 
 // @public - Login component
-const setup = component_wrapper => {
+const setup = (component_wrapper, data) => {
 	const componentState = {
 		client_id: '',
 		client_secret: '',
 	};
 
-	// We do not want to brute-force the DOM with innerHTML
-	// So we do it in memory.
-	const templateWrapper = document.createElement('div');
-	templateWrapper.className += 'setup_wrapper';
-	templateWrapper.innerHTML = template;
-
 	// Render view;
-	component_wrapper.querySelector('.login_panel').append(templateWrapper);
+	component_wrapper.innerHTML = template;
 	message('Initializing App...');
 
 	// Validate commponent is ready
@@ -60,7 +54,7 @@ const setup = component_wrapper => {
 
 		on('authenticated', () => {
 			message('You can now login using your battle.net account');
-			templateWrapper.setAttribute('style', 'display: none;');
+			emit('route', 'login');
 		})
 	});
 }

@@ -2,10 +2,8 @@ const Datastore = require('nedb');
 const electron = require('electron').remote;
 const db = new Datastore({ filename: './build/data/app.db', autoload: true });
 
-// Appication Components
-const login_component = require('./components/login/');
-const setup_component = require('./components/login/setup');
-const fetch_members = require('./components/fetchers/fetch_members');
+// Routes
+const routes = require('./routes');
 
 // Bnet oAuth
 const bnet = require('./bnet/bnet');
@@ -28,21 +26,20 @@ const application_start = () => {
 		activeComponent: 'none'
 	}
 
-	// Set the application state
+	// Set the application state.
 	setState(appState);
 
-	// Initialize the components.
-	login_component(comp);
-	fetch_members(comp);
+	// Initialize the battle.net oAuth component.
 	bnet();
 
-	// Look in the database to see if we have already setup the app.
-	// Otherwise we load the setup component.
+	// Check in the database to see if we have already setup the app.
+	// Otherwise send the user to the login component.
 	db.find({ 'desktop_app_setup': 'yes' }, (error, data) => {
 		if (data.length === 0) {
-			setup_component(comp);
+			routes('login/init');
 		} else {
 			setState(data[0]);
+			routes('login');
 		}
 	});
 
@@ -57,6 +54,7 @@ const application_start = () => {
 		db.insert(data, (error, newDocs) => {});
 	});
 
+
 	on('authenticated', (token) => {
 		const appState = getState();
 		const credentials = appState.credentials;
@@ -68,6 +66,7 @@ const application_start = () => {
 		db.update({ 'desktop_app_setup': 'yes' }, credentials, {}, (error, numberReplaced) => {});
 	});
 
+	// Allow users to close the application.
 	document.querySelector('.close_app').addEventListener('click', () => {
 		const currentWindow = electron.getCurrentWindow();
 		currentWindow.close();

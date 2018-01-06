@@ -35,7 +35,7 @@ function createWindow () {
 		mainWindow = null
 	});
 
-	// mainWindow.webContents.openDevTools();
+	mainWindow.webContents.openDevTools();
 };
 
 // When application is ready we create a new window.

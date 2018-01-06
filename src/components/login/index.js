@@ -3,6 +3,7 @@ const { getState, setState } = require('../../utils/application_state');
 const { on, emit } = require('../../utils/application_events');
 const getData = require('../../utils/request');
 const message = require('../message/');
+const account = require('./account')
 
 // Template
 const template = require('./view_login');
@@ -16,7 +17,7 @@ const login = component_wrapper => {
 	setState({
 		id: component_id,
 		set: true
-	})
+	});
 
 	// Render view;
 	component_wrapper.innerHTML = template;
@@ -40,17 +41,17 @@ const login = component_wrapper => {
 
 		// Try logging in.
 		getData(requestUrl).then( (response) => {
-			console.log(response);
-			body.className = '';
+			emit('route', 'login/account', response);
+			document.querySelector('body').className = '';
 			message('Success, processing your account');
 		}, (error) => {
 			on('re_authenticated', (response) => {
 				const newRequestUrl = tokenUrl + response.access_token;
 
 				getData(newRequestUrl).then( (response) => {
-					console.log(response);
-					body.className = '';
 					message('Success, processing your account');
+					document.querySelector('body').className = '';
+					emit('route', 'login/account', response);
 				}, (error) => {
 					message('There is an error with your account');
 				})

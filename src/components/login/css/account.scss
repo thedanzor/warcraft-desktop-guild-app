@@ -1,0 +1,31 @@
+.character_list {
+  min-height: 400px;
+  padding: 60px 0;
+
+  .character_wrapper {
+    width: 25%;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 0px 20px;
+    margin: 20px 0;
+
+    img {
+      border-radius: 100%;
+      width: 80%;
+      margin: 0 auto 20px;
+      height: auto;
+      border: 2px dashed #fff;
+    }
+
+    div {
+      text-align: center;
+      padding: 6px 0;
+    }
+
+    h3 {
+      font-size: 22px;
+      font-weight: bold;
+      text-align: center;
+    }
+  }
+}
